@@ -1,64 +1,77 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react';
 
-const ThemeContext = createContext(null)
+const ThemeContext = createContext(null);
 
-/**
- * Determines the initial theme:
- * 1. Saved preference in localStorage
- * 2. System preference via prefers-color-scheme
- * 3. Default to 'light'
- */
+const PRESET_OPTIONS = [
+  { id: 'indigo', name: 'Cyber Indigo', color: '#6366F1', bgGrad: 'from-indigo-600 to-blue-600' },
+  { id: 'violet', name: 'Cosmic Violet', color: '#A855F7', bgGrad: 'from-purple-600 to-pink-600' },
+  { id: 'emerald', name: 'Emerald Aurora', color: '#10B981', bgGrad: 'from-emerald-500 to-teal-600' },
+  { id: 'sunset', name: 'Sunset Amber', color: '#F97316', bgGrad: 'from-amber-500 to-rose-600' },
+];
+
 function getInitialTheme() {
-  if (typeof window === 'undefined') return 'light'
+  if (typeof window === 'undefined') return 'dark'; // Default to dark for ultra-attractive cyber look
+  const saved = localStorage.getItem('learnova-theme');
+  if (saved === 'dark' || saved === 'light') return saved;
+  return 'dark';
+}
 
-  const saved = localStorage.getItem('learnova-theme')
-  if (saved === 'dark' || saved === 'light') return saved
-
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-  return prefersDark ? 'dark' : 'light'
+function getInitialPreset() {
+  if (typeof window === 'undefined') return 'indigo';
+  const saved = localStorage.getItem('learnova-preset');
+  if (['indigo', 'violet', 'emerald', 'sunset'].includes(saved)) return saved;
+  return 'indigo';
 }
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(getInitialTheme)
+  const [theme, setTheme] = useState(getInitialTheme);
+  const [colorPreset, setColorPreset] = useState(getInitialPreset);
 
-  // Apply or remove the 'dark' class on <html>
+  // Sync theme mode (dark/light) & color preset to document root
   useEffect(() => {
-    const root = document.documentElement
+    const root = document.documentElement;
     if (theme === 'dark') {
-      root.classList.add('dark')
+      root.classList.add('dark');
     } else {
-      root.classList.remove('dark')
+      root.classList.remove('dark');
     }
-  }, [theme])
 
-  // Persist preference to localStorage
-  useEffect(() => {
-    localStorage.setItem('learnova-theme', theme)
-  }, [theme])
+    // Remove all old presets
+    PRESET_OPTIONS.forEach((p) => root.classList.remove(`preset-${p.id}`));
+    root.classList.add(`preset-${colorPreset}`);
+
+    localStorage.setItem('learnova-theme', theme);
+    localStorage.setItem('learnova-preset', colorPreset);
+  }, [theme, colorPreset]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
-  }
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
-  const isDark = theme === 'dark'
+  const isDark = theme === 'dark';
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, isDark }}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        toggleTheme,
+        isDark,
+        colorPreset,
+        setColorPreset,
+        presetOptions: PRESET_OPTIONS,
+      }}
+    >
       {children}
     </ThemeContext.Provider>
-  )
+  );
 }
 
-/**
- * Custom hook to consume ThemeContext.
- * Must be used within a <ThemeProvider>.
- */
 export function useTheme() {
-  const ctx = useContext(ThemeContext)
+  const ctx = useContext(ThemeContext);
   if (!ctx) {
-    throw new Error('useTheme must be used within a ThemeProvider')
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
-  return ctx
+  return ctx;
 }
 
-export default ThemeProvider
+export default ThemeProvider;
