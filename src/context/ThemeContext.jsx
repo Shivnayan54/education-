@@ -3,10 +3,10 @@ import { createContext, useContext, useEffect, useState } from 'react';
 const ThemeContext = createContext(null);
 
 function getInitialTheme() {
-  if (typeof window === 'undefined') return 'dark';
+  if (typeof window === 'undefined') return 'light';
   const saved = localStorage.getItem('learnova-theme');
   if (saved === 'dark' || saved === 'light') return saved;
-  return 'dark'; // Velvet Obsidian default for ultra-satisfying look
+  return 'light';
 }
 
 export function ThemeProvider({ children }) {
@@ -16,9 +16,7 @@ export function ThemeProvider({ children }) {
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
-      root.classList.remove('light');
     } else {
-      root.classList.add('light');
       root.classList.remove('dark');
     }
     localStorage.setItem('learnova-theme', theme);
