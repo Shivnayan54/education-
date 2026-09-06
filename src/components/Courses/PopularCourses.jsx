@@ -8,11 +8,13 @@ import { courses } from '../../data/courses';
 export default function PopularCourses() {
   const [activeTab, setActiveTab] = useState('All');
 
-  const filterTabs = ['All', 'Physics', 'Mathematics', 'Biology', 'Chemistry', 'Programming'];
+  const filterTabs = ['All', 'Python', 'C++', 'Java'];
+
+  const top3Courses = courses.slice(0, 3);
 
   const filteredCourses = activeTab === 'All'
-    ? courses.slice(0, 6)
-    : courses.filter((c) => c.category === activeTab);
+    ? top3Courses
+    : top3Courses.filter((c) => c.category === activeTab);
 
   return (
     <section className="py-16 md:py-24 bg-slate-50/70 dark:bg-slate-950/70">
@@ -23,13 +25,13 @@ export default function PopularCourses() {
           <div>
             <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 text-xs font-bold uppercase tracking-wider mb-3 border border-orange-200/60 dark:border-orange-800/60">
               <Flame className="w-3.5 h-3.5 fill-orange-500 text-orange-500" />
-              Featured Batches
+              Featured Masterclasses
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Popular Courses
+              Popular Programming Courses
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl">
-              Hand-picked best-selling programs with live masterclasses, personalized study tracks, and AI doubt clearing.
+              Master top programming languages — Python, C++ DSA, and Java Full Stack with live classes, interactive coding labs & AI mentors.
             </p>
           </div>
 
