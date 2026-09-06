@@ -1,24 +1,27 @@
 import { motion } from 'framer-motion';
-import { Sparkles, Send, Flame, Star, CheckCircle2 } from 'lucide-react';
+import { Sparkles, Send, Flame, Star, CheckCircle2, Bot } from 'lucide-react';
 
 export default function HeroAICard() {
   const subjects = [
     { icon: '⚛️', name: 'Physics', prompt: 'Newton\'s Laws & Gravity' },
     { icon: '📐', name: 'Mathematics', prompt: 'Calculus & Vectors' },
-    { icon: '🧪', name: 'Chemistry', prompt: 'Organic Mechanisms' },
-    { icon: '🌱', name: 'Biology', prompt: 'Photosynthesis & Genetics' },
+    { icon: '🧪', name: 'Chemistry', prompt: 'Organic Reaction Mechanisms' },
+    { icon: '🌱', name: 'Biology', prompt: 'NCERT Photosynthesis & Genetics' },
   ];
 
   return (
-    <div className="relative w-full max-w-md mx-auto lg:max-w-none">
+    <div className="relative w-full max-w-lg mx-auto lg:max-w-none">
       
+      {/* Ambient Radial Halo */}
+      <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-600/30 via-violet-600/20 to-pink-600/20 rounded-3xl blur-3xl -z-10 opacity-70 pointer-events-none" />
+
       {/* Floating Badge 1: 7-Day Streak */}
       <motion.div
-        animate={{ y: [0, -6, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -top-4 -left-3 sm:-left-5 z-20 bg-white dark:bg-[#151C2C] text-slate-800 dark:text-slate-100 px-3.5 py-1.5 rounded-2xl shadow-md border border-slate-200/80 dark:border-slate-700/80 flex items-center gap-2 text-xs font-bold"
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute -top-5 -left-3 sm:-left-5 z-20 bg-[#161D2F] light:bg-white text-white light:text-slate-900 px-4 py-2 rounded-2xl shadow-xl border border-white/15 light:border-slate-200 flex items-center gap-2.5 text-xs font-black backdrop-blur-xl"
       >
-        <span className="w-5 h-5 rounded-full bg-orange-100 dark:bg-orange-950/60 flex items-center justify-center text-orange-500 text-xs">
+        <span className="w-6 h-6 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center text-xs">
           🔥
         </span>
         <span>7 Day Streak</span>
@@ -26,66 +29,84 @@ export default function HeroAICard() {
 
       {/* Floating Badge 2: Progress */}
       <motion.div
-        animate={{ y: [0, 6, 0] }}
-        transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
-        className="absolute -bottom-4 -right-3 sm:-right-4 z-20 bg-white dark:bg-[#151C2C] text-slate-800 dark:text-slate-100 px-3.5 py-1.5 rounded-2xl shadow-md border border-slate-200/80 dark:border-slate-700/80 flex items-center gap-2 text-xs font-bold"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+        className="absolute -bottom-5 -right-3 sm:-right-4 z-20 bg-[#161D2F] light:bg-white text-white light:text-slate-900 px-4 py-2 rounded-2xl shadow-xl border border-white/15 light:border-slate-200 flex items-center gap-2.5 text-xs font-black backdrop-blur-xl"
       >
-        <span className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-xs font-bold">
+        <span className="w-6 h-6 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs">
           ✓
         </span>
-        <span>87% Weekly Goal</span>
+        <span>87% Weekly Goal ⚡</span>
       </motion.div>
 
-      {/* Main Clean Card */}
-      <div className="bg-white dark:bg-[#111724] border border-slate-200/80 dark:border-slate-800 rounded-3xl shadow-[0_4px_24px_rgba(0,0,0,0.05)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.3)] p-6 sm:p-7 space-y-5">
+      {/* Floating Badge 3: Quiz Score */}
+      <motion.div
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+        className="absolute -bottom-5 -left-2 sm:-left-4 z-20 bg-[#161D2F] light:bg-white text-white light:text-slate-900 px-3.5 py-2 rounded-2xl shadow-xl border border-white/15 light:border-slate-200 flex items-center gap-2 text-xs font-black backdrop-blur-xl"
+      >
+        <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+        <span>Score: 92% ⭐</span>
+      </motion.div>
+
+      {/* Main Bento AI Card */}
+      <div className="bg-[#121827]/90 light:bg-white/95 backdrop-blur-2xl border border-white/15 light:border-slate-200/90 rounded-3xl shadow-2xl p-6 sm:p-7 space-y-5">
         
-        {/* Card Topbar */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xs">
-              <Sparkles className="w-4 h-4" />
+        {/* Card Header */}
+        <div className="flex items-center justify-between pb-4 border-b border-white/10 light:border-slate-100">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center text-white shadow-md shadow-indigo-600/30">
+              <Bot className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-sm text-slate-900 dark:text-white">
-                AI Study Assistant
-              </h3>
-              <p className="text-[11px] text-slate-400">
-                Always ready to help explain concepts
+              <div className="flex items-center gap-2">
+                <h3 className="font-extrabold text-sm sm:text-base text-white light:text-slate-900">
+                  Learnova AI Tutor
+                </h3>
+                <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Live
+                </span>
+              </div>
+              <p className="text-xs text-slate-400">
+                Personalized 24/7 concept breakdown
               </p>
             </div>
           </div>
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/60">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            Ready
-          </span>
+
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+          </div>
         </div>
 
-        {/* AI Dialogue Bubble */}
+        {/* AI Message Bubble */}
         <div className="space-y-3">
-          <div className="flex gap-2.5 items-start">
-            <div className="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-black flex-shrink-0 mt-0.5 shadow-xs">
+          <div className="flex gap-3 items-start">
+            <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-600 to-violet-600 text-white flex items-center justify-center text-[10px] font-black flex-shrink-0 mt-0.5 shadow-md">
               AI
             </div>
-            <div className="bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-2xl rounded-tl-sm text-xs text-slate-700 dark:text-slate-200 leading-relaxed border border-slate-100 dark:border-slate-700/60">
-              <p className="font-medium">
-                👋 What concept would you like to master today?
+            <div className="bg-[#182138] light:bg-slate-50 p-4 rounded-2xl rounded-tl-sm text-xs sm:text-sm text-slate-200 light:text-slate-800 leading-relaxed border border-white/10 light:border-slate-200">
+              <p className="font-bold text-white light:text-slate-900">
+                👋 Hello! What concept would you like to master today?
               </p>
-              <p className="text-[11px] text-slate-400 mt-1">
-                Pick a topic below or type any doubt for simple explanations.
+              <p className="text-xs text-slate-400 mt-1">
+                Pick a subject below or ask any physics, math, or chemistry question with step-by-step formulas!
               </p>
             </div>
           </div>
 
-          {/* Clean Subject Pills */}
-          <div className="grid grid-cols-2 gap-2 pt-1">
+          {/* Subject Pills */}
+          <div className="grid grid-cols-2 gap-2.5 pt-1">
             {subjects.map((sub) => (
               <div
                 key={sub.name}
-                className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50/70 dark:bg-slate-800/40 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 border border-slate-200/60 dark:border-slate-700/50 hover:border-indigo-300 dark:hover:border-indigo-700 transition-all cursor-pointer"
+                className="flex items-center gap-2.5 p-3 rounded-2xl bg-white/5 light:bg-slate-50 hover:bg-white/10 light:hover:bg-indigo-50 border border-white/10 light:border-slate-200 hover:border-indigo-500/50 transition-all cursor-pointer group"
               >
-                <span className="text-base">{sub.icon}</span>
+                <span className="text-xl group-hover:scale-110 transition-transform">{sub.icon}</span>
                 <div className="min-w-0">
-                  <div className="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate">
+                  <div className="text-xs font-bold text-slate-200 light:text-slate-800 group-hover:text-indigo-400 transition-colors truncate">
                     {sub.name}
                   </div>
                   <div className="text-[10px] text-slate-400 truncate">
@@ -97,17 +118,17 @@ export default function HeroAICard() {
           </div>
         </div>
 
-        {/* Clean Input Area */}
+        {/* Mock Query Input Bar */}
         <div className="relative pt-1">
           <input
             type="text"
             readOnly
-            value="What is Newton's second law?"
-            className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 rounded-xl py-2.5 pl-3.5 pr-10 text-xs text-slate-700 dark:text-slate-300 cursor-default focus:outline-none"
+            value="What is Newton's second law of motion?"
+            className="w-full bg-[#161E33] light:bg-slate-100 border border-white/10 light:border-slate-300 rounded-2xl py-3 pl-4 pr-12 text-xs sm:text-sm text-slate-200 light:text-slate-800 cursor-default focus:outline-none"
           />
           <button
             type="button"
-            className="absolute right-1.5 top-2.5 bottom-1.5 px-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center transition-colors"
+            className="absolute right-1.5 top-2.5 bottom-1.5 px-3.5 bg-gradient-to-r from-indigo-600 to-violet-600 text-white rounded-xl flex items-center justify-center shadow-md shadow-indigo-600/30"
           >
             <Send className="w-3.5 h-3.5" />
           </button>

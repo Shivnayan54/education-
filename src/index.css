@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --brand-primary: #1e3a8a;
-    --brand-accent: #4f46e5;
+    --brand: #6366f1;
+    --brand-dark: #4f46e5;
   }
 
   html {
@@ -15,12 +15,23 @@
   }
 
   body {
-    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    @apply bg-[#FAFAFC] dark:bg-[#0B0F17] text-slate-800 dark:text-slate-100 transition-colors duration-300;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-[#090D16] text-slate-100 transition-colors duration-500 selection:bg-indigo-500/30 selection:text-indigo-300;
+    background-image: 
+      radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(168, 85, 247, 0.10) 0%, transparent 35%),
+      radial-gradient(circle at 50% 60%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 80% 85%, rgba(244, 63, 94, 0.08) 0%, transparent 35%);
+    background-attachment: fixed;
   }
 
-  ::selection {
-    @apply bg-indigo-500/20 text-indigo-600 dark:text-indigo-300;
+  .light body, :root:not(.dark) body {
+    @apply bg-[#F6F8FC] text-slate-900;
+    background-image: 
+      radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.06) 0%, transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(168, 85, 247, 0.05) 0%, transparent 35%),
+      radial-gradient(circle at 80% 85%, rgba(244, 63, 94, 0.04) 0%, transparent 35%);
+    background-attachment: fixed;
   }
 
   ::-webkit-scrollbar {
@@ -32,37 +43,58 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 dark:bg-slate-700 rounded-full hover:bg-slate-400 dark:hover:bg-slate-600;
+    @apply bg-slate-700/60 rounded-full hover:bg-slate-600;
   }
 }
 
 @layer components {
-  /* Soft, satisfying cards */
-  .clean-card {
-    @apply bg-white dark:bg-[#121824] rounded-3xl border border-slate-200/70 dark:border-slate-800/80 shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-200;
+  /* Ultra-Satisfying Bento Cards */
+  .bento-card {
+    @apply bg-[#101626]/80 dark:bg-[#101626]/80 light:bg-white/90 backdrop-blur-xl rounded-3xl border border-white/10 light:border-slate-200/90 shadow-[0_8px_32px_rgba(0,0,0,0.3)] light:shadow-[0_8px_32px_rgba(0,0,0,0.04)] transition-all duration-300;
   }
 
-  .clean-card-hover {
-    @apply hover:border-indigo-300 dark:hover:border-indigo-700/60 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:-translate-y-1;
+  .bento-card-hover {
+    @apply hover:border-indigo-500/40 hover:shadow-[0_16px_48px_rgba(99,102,241,0.15)] hover:-translate-y-1;
   }
 
-  /* Clean text gradient */
-  .gradient-text {
-    @apply bg-gradient-to-r from-slate-900 via-indigo-900 to-indigo-600 dark:from-white dark:via-indigo-200 dark:to-indigo-400 bg-clip-text text-transparent;
+  /* Shimmer glowing pill */
+  .glow-pill {
+    @apply relative overflow-hidden inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/15 backdrop-blur-xl shadow-lg;
+  }
+
+  .glow-pill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    animation: shimmer 3.5s infinite;
+  }
+
+  /* Gradient Text */
+  .text-glow-gradient {
+    @apply bg-gradient-to-r from-white via-indigo-200 to-indigo-400 light:from-slate-900 light:via-indigo-900 light:to-indigo-600 bg-clip-text text-transparent;
   }
 }
 
 @layer utilities {
-  @keyframes softFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-6px); }
+  @keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
   }
 
-  .animate-soft-float {
-    animation: softFloat 4s ease-in-out infinite;
+  @keyframes gentleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
   }
 
-  .animate-soft-float-delayed {
-    animation: softFloat 4.5s ease-in-out 2s infinite;
+  .animate-gentle-bounce {
+    animation: gentleBounce 4s ease-in-out infinite;
+  }
+
+  .animate-gentle-bounce-delayed {
+    animation: gentleBounce 4.5s ease-in-out 1.8s infinite;
   }
 }
